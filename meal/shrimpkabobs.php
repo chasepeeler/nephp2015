@@ -11,6 +11,10 @@ use BubbaGump\Shrimp;
 class ShrimpKabobs implements MealInterface
 {
 
+	use ShrimpTrait {
+		prepare as stPrepare;
+	}
+
 	/**
 	 * @param Restaurant $restaurant
 	 */
@@ -31,11 +35,11 @@ class ShrimpKabobs implements MealInterface
 	 */
 	public function prepare()
 	{
+		$plate = $this->stPrepare();
 		$skewer = new SkeweredShrimp();
-		for($i=0;$i<6;$i++){
-			$skewer->addShrimp(new Shrimp());
+		foreach($plate as $shrimp){
+			$skewer->addShrimp($shrimp);
 		}
-		$this->restaurant->peel($skewer);
 		return $skewer;
 	}
 
@@ -54,18 +58,20 @@ class ShrimpKabobs implements MealInterface
 		return $shrimp;
 	}
 
+
 	/**
-	 * Serve the meal
-	 *
-	 *
-	 * @param ShrimpCollectionInterface|Dish $shrimp
-	 *
-	 * @return Dish
+	 * @return Restaurant
 	 */
-	public function finalize($shrimp)
+	protected function getRestaurant()
 	{
-		$dish = new Dish\Shrimp();
-		$dish->addShrimp($shrimp);
-		return $dish;
+		return $this->restaurant;
+	}
+
+	/**
+	 * @return int
+	 */
+	protected function getNumShrimp()
+	{
+		return 6;
 	}
 }

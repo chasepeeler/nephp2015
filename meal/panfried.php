@@ -11,6 +11,8 @@ use BubbaGump\Shrimp;
 class PanFried implements MealInterface
 {
 
+	use ShrimpTrait;
+
 	/**
 	 * @param Restaurant $restaurant
 	 */
@@ -23,21 +25,6 @@ class PanFried implements MealInterface
 	 * @var Restaurant
 	 */
 	protected $restaurant;
-
-	/**
-	 * Prepare the meal to be cooked.
-	 *
-	 * @return ShrimpCollectionInterface
-	 */
-	public function prepare()
-	{
-		$plate = new SkeweredShrimp();
-		for($i=0;$i<10;$i++){
-			$plate->addShrimp(new Shrimp());
-		}
-		$this->restaurant->peel($plate);
-		return $plate;
-	}
 
 	/**
 	 * Cook the meal
@@ -54,17 +41,18 @@ class PanFried implements MealInterface
 	}
 
 	/**
-	 * Serve the meal
-	 *
-	 *
-	 * @param ShrimpCollectionInterface|Dish $shrimp
-	 *
-	 * @return Dish
+	 * @return Restaurant
 	 */
-	public function finalize($shrimp)
+	protected function getRestaurant()
 	{
-		$dish = new Dish\Shrimp();
-		$dish->addShrimp($shrimp);
-		return $dish;
+		return $this->restaurant;
+	}
+
+	/**
+	 * @return int
+	 */
+	protected function getNumShrimp()
+	{
+		return 10;
 	}
 }
