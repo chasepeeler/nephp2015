@@ -9,7 +9,7 @@ use BubbaGump\Dish;
 use BubbaGump\Restaurant;
 use BubbaGump\Shrimp;
 
-class ShrimpCreole implements MealInterface
+class StirFry implements MealInterface
 {
 
 	/**
@@ -38,8 +38,9 @@ class ShrimpCreole implements MealInterface
 			$plate->addShrimp(new Shrimp());
 		}
 		$this->restaurant->peel($plate);
-		$this->restaurant->chop($plate);
-		return $plate;
+		$choppedShrimp = $this->restaurant->chop($plate);
+
+		return $choppedShrimp;
 	}
 
 	/**
@@ -66,7 +67,8 @@ class ShrimpCreole implements MealInterface
 	 */
 	public function finalize($shrimp)
 	{
-		$dish = new Dish\Soup\Creole();
+		$dish = new Dish\StirFry();
+		$dish->addVegetables();
 		$dish->addShrimp($shrimp);
 		$dish->prepareDish();
 		return $dish;

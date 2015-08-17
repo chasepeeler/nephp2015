@@ -2,20 +2,14 @@
 
 namespace BubbaGump\Meal;
 
-use BubbaGump\Collection\PlatedShrimp;
 use BubbaGump\Collection\ShrimpCollectionInterface;
 use BubbaGump\Collection\SkeweredShrimp;
 use BubbaGump\Dish;
 use BubbaGump\Restaurant;
 use BubbaGump\Shrimp;
 
-class ShrimpCreole implements MealInterface
+class DeepFried implements MealInterface
 {
-
-	/**
-	 * @var Restaurant
-	 */
-	protected $restaurant;
 
 	/**
 	 * @param Restaurant $restaurant
@@ -25,6 +19,10 @@ class ShrimpCreole implements MealInterface
 		$this->restaurant = $restaurant;
 	}
 
+	/**
+	 * @var Restaurant
+	 */
+	protected $restaurant;
 
 	/**
 	 * Prepare the meal to be cooked.
@@ -33,12 +31,11 @@ class ShrimpCreole implements MealInterface
 	 */
 	public function prepare()
 	{
-		$plate = new PlatedShrimp();
-		for ($i = 0; $i < 10; $i++) {
+		$plate = new SkeweredShrimp();
+		for($i=0;$i<10;$i++){
 			$plate->addShrimp(new Shrimp());
 		}
 		$this->restaurant->peel($plate);
-		$this->restaurant->chop($plate);
 		return $plate;
 	}
 
@@ -52,9 +49,9 @@ class ShrimpCreole implements MealInterface
 	 */
 	public function cook($shrimp)
 	{
+		$this->restaurant->cook('DeepFried',$shrimp);
 		return $shrimp;
 	}
-
 
 	/**
 	 * Serve the meal
@@ -66,9 +63,8 @@ class ShrimpCreole implements MealInterface
 	 */
 	public function finalize($shrimp)
 	{
-		$dish = new Dish\Soup\Creole();
+		$dish = new Dish\Shrimp();
 		$dish->addShrimp($shrimp);
-		$dish->prepareDish();
 		return $dish;
 	}
 }

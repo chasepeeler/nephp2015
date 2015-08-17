@@ -4,6 +4,7 @@ namespace BubbaGump\Meal;
 
 use BubbaGump\Collection\ShrimpCollectionInterface;
 use BubbaGump\Collection\SkeweredShrimp;
+use BubbaGump\Dish;
 use BubbaGump\Restaurant;
 use BubbaGump\Shrimp;
 
@@ -48,32 +49,23 @@ class ShrimpKabobs implements MealInterface
 	 */
 	public function cook($shrimp)
 	{
-		$this->bbq($shrimp);
+		$this->restaurant->sauce($shrimp,'bbq');
+		$this->restaurant->cook('Grilled',$shrimp);
+		return $shrimp;
 	}
 
 	/**
 	 * Serve the meal
 	 *
 	 *
-	 * @param ShrimpCollectionInterface $shrimp
+	 * @param ShrimpCollectionInterface|Dish $shrimp
+	 *
+	 * @return Dish
 	 */
-	public function serve($shrimp)
+	public function finalize($shrimp)
 	{
-		//deliver shrimp to customer
+		$dish = new Dish\Shrimp();
+		$dish->addShrimp($shrimp);
+		return $dish;
 	}
-
-	protected function bbq($shrimp){
-		foreach($shrimp as $s){
-			$this->baste($s);
-		}
-		$this->restaurant->cook('Grilled',$shrimp);
-		return $shrimp;
-	}
-
-
-	protected function baste($shrimp){
-		//cover shrimp with bbq sauce
-	}
-
-
 }

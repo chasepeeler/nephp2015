@@ -3,6 +3,7 @@
 namespace BubbaGump\Meal;
 
 use BubbaGump\Collection\ShrimpCollectionInterface;
+use BubbaGump\Dish;
 use BubbaGump\Restaurant;
 
 interface MealInterface
@@ -34,9 +35,11 @@ interface MealInterface
 	 * Serve the meal
 	 *
 	 *
-	 * @param ShrimpCollectionInterface  $shrimp
+	 * @param ShrimpCollectionInterface|Dish  $shrimp
+	 *
+	 * @return Dish
 	 */
-	public function serve($shrimp);
+	public function finalize($shrimp);
 
 
 }
