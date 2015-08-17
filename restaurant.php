@@ -11,87 +11,89 @@ class Restaurant
 
 	public function processOrder($name)
 	{
-		switch($name){
-			case "ShrimpKabobs":
-				$skewer = new SkeweredShrimp();
-				for($i=0;$i<6;$i++) {
-					$skewer->addShrimp(new Shrimp());
-				}
-				$this->cook('Barbecued',$skewer);
-				$this->serve($skewer);
-				break;
-			case "ShrimpCreole":
-				$plate = new PlatedShrimp();
-				for($i=0;$i<10;$i++){
-					$plate->addShrimp(new Shrimp());
-				}
-				$this->peel($plate);
-				$choppedShrimp = $this->chop($plate);
-				//prepare creole
-				//add chopped shrimp to creole
-				//serve creole
-				break;
-			case "ShrimpGumbo":
-				$plate = new PlatedShrimp();
-				for ($i = 0; $i < 10; $i++) {
-					$plate->addShrimp(new Shrimp());
-				}
-				$this->peel($plate);
-				$choppedShrimp = $this->chop($plate);
-				//prepare gumbo
-				//add chopped shrimp to gumbo
-				//serve gumbo
-				break;
-			case "PanFried":
-				$plate = new PlatedShrimp();
-				for ($i = 0; $i < 10; $i++) {
-					$plate->addShrimp(new Shrimp());
-				}
-				$this->peel($plate);
-				$this->cook('Sauteed',$plate);
-				$this->serve($plate);
-				break;
-			case "DeepFried":
-				$plate = new PlatedShrimp();
-				for ($i = 0; $i < 10; $i++) {
-					$plate->addShrimp(new Shrimp());
-				}
-				$this->peel($plate);
-				$this->cook('DeepFry', $plate);
-				$this->serve($plate);
-				break;
-			case "StirFried":
-				$plate = new PlatedShrimp();
-				for ($i = 0; $i < 10; $i++) {
-					$plate->addShrimp(new Shrimp());
-				}
-				$this->peel($plate);
-				$this->cook('StirFry', $plate);
-				$this->serve($plate);
-				break;
-			case "PineappleShrimp":
-				break;
-			case "LemonShrimp":
-				break;
-			case "CoconutShrimp":
-				break;
-			case "PepperShrimp":
-				break;
-			case "ShrimpSoup":
-				break;
-			case "ShrimpStew":
-				break;
-			case "ShrimpSalad":
-				break;
-			case "ShrimpAndPotatoes":
-				break;
-			case "ShrimpBurger":
-				break;
-			case "ShrimpSandwich":
-				break;
-			default:
-				break;
+
+		$ns = '\BubbaGump\Meal\\';
+		if(class_exists($ns.$name) && is_a($ns.$name,$ns.'MealInterface',true)){
+			$class = $ns.$name;
+			/** @var \BubbaGump\Meal\MealInterface $c */
+			$c = new $class($this);
+			$shrimp = $c->prepare();
+			$shrimp = $c->cook($shrimp);
+			$c->serve($shrimp);
 		}
+//
+//			case "ShrimpCreole":
+//				$plate = new PlatedShrimp();
+//				for($i=0;$i<10;$i++){
+//					$plate->addShrimp(new Shrimp());
+//				}
+//				$this->peel($plate);
+//				$choppedShrimp = $this->chop($plate);
+//				//prepare creole
+//				//add chopped shrimp to creole
+//				//serve creole
+//				break;
+//			case "ShrimpGumbo":
+//				$plate = new PlatedShrimp();
+//				for ($i = 0; $i < 10; $i++) {
+//					$plate->addShrimp(new Shrimp());
+//				}
+//				$this->peel($plate);
+//				$choppedShrimp = $this->chop($plate);
+//				//prepare gumbo
+//				//add chopped shrimp to gumbo
+//				//serve gumbo
+//				break;
+//			case "PanFried":
+//				$plate = new PlatedShrimp();
+//				for ($i = 0; $i < 10; $i++) {
+//					$plate->addShrimp(new Shrimp());
+//				}
+//				$this->peel($plate);
+//				$this->cook('Sauteed',$plate);
+//				$this->serve($plate);
+//				break;
+//			case "DeepFried":
+//				$plate = new PlatedShrimp();
+//				for ($i = 0; $i < 10; $i++) {
+//					$plate->addShrimp(new Shrimp());
+//				}
+//				$this->peel($plate);
+//				$this->cook('DeepFry', $plate);
+//				$this->serve($plate);
+//				break;
+//			case "StirFried":
+//				$plate = new PlatedShrimp();
+//				for ($i = 0; $i < 10; $i++) {
+//					$plate->addShrimp(new Shrimp());
+//				}
+//				$this->peel($plate);
+//				$this->cook('StirFry', $plate);
+//				$this->serve($plate);
+//				break;
+//			case "PineappleShrimp":
+//				break;
+//			case "LemonShrimp":
+//				break;
+//			case "CoconutShrimp":
+//				break;
+//			case "PepperShrimp":
+//				break;
+//			case "ShrimpSoup":
+//				break;
+//			case "ShrimpStew":
+//				break;
+//			case "ShrimpSalad":
+//				break;
+//			case "ShrimpAndPotatoes":
+//				break;
+//			case "ShrimpBurger":
+//				break;
+//			case "ShrimpSandwich":
+//				break;
+//			default:
+//				break;
+//		}
 
 	}
 
@@ -100,7 +102,7 @@ class Restaurant
 	 *
 	 * @return $this
 	 */
-	protected function peel($shrimp){
+	public function peel($shrimp){
 		foreach($shrimp as $s){
 			//peel the shrimp
 		}
@@ -113,7 +115,7 @@ class Restaurant
 	 * @return $this
 	 */
 	protected function serve($shrimp){
-		
+
 	}
 
 	/**
@@ -121,13 +123,13 @@ class Restaurant
 	 *
 	 * @return ShrimpCollectionInterface
 	 */
-	protected function chop($shrimp){
+	public function chop($shrimp){
 
 	}
 
-	protected function cook($method,$shrimp){
+	public function cook($method,$shrimp){
 		switch($method) {
-			case "Barbecued":
+			case "Grilled":
 				break;
 			case "Broiled":
 				break;
@@ -135,6 +137,7 @@ class Restaurant
 				break;
 			case "Sauteed":
 				break;
+			case "DeepFried":
 			default:
 				break;
 		}
