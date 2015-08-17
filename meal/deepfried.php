@@ -2,6 +2,7 @@
 
 namespace BubbaGump\Meal;
 
+use BubbaGump\Collection\PlatedShrimp;
 use BubbaGump\Collection\ShrimpCollectionInterface;
 use BubbaGump\Collection\SkeweredShrimp;
 use BubbaGump\Dish;
@@ -31,7 +32,7 @@ class DeepFried implements MealInterface
 	 */
 	public function prepare()
 	{
-		$plate = new SkeweredShrimp();
+		$plate = new PlatedShrimp();
 		for($i=0;$i<10;$i++){
 			$plate->addShrimp(new Shrimp());
 		}
