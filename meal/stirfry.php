@@ -28,6 +28,10 @@ class StirFry implements MealInterface
 	}
 
 
+	public function cook($shrimp){
+		return $shrimp;
+	}
+
 	/**
 	 * Serve the meal
 	 *

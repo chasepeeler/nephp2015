@@ -7,10 +7,13 @@ use BubbaGump\Collection\ShrimpCollectionInterface;
 use BubbaGump\Dish;
 use BubbaGump\Dish\Soup;
 use BubbaGump\Restaurant;
+use BubbaGump\SauteedTrait;
 use BubbaGump\Shrimp;
 
 trait SoupTrait
 {
+
+	use SauteedTrait;
 
 	/**
 	 * @return Restaurant
@@ -49,7 +52,7 @@ trait SoupTrait
 	 */
 	public function cook($shrimp)
 	{
-		return $shrimp;
+		$this->sautee($shrimp);
 	}
 
 	/**

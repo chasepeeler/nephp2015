@@ -5,12 +5,14 @@ namespace BubbaGump\Meal;
 use BubbaGump\Collection\ShrimpCollectionInterface;
 use BubbaGump\Collection\SkeweredShrimp;
 use BubbaGump\Dish;
+use BubbaGump\GrilledTrait;
 use BubbaGump\Restaurant;
 use BubbaGump\Shrimp;
 
 class ShrimpKabobs implements MealInterface
 {
 
+	use GrilledTrait;
 	use ShrimpTrait {
 		prepare as stPrepare;
 	}
@@ -54,7 +56,7 @@ class ShrimpKabobs implements MealInterface
 	public function cook($shrimp)
 	{
 		$this->restaurant->sauce($shrimp,'bbq');
-		$this->restaurant->cook('Grilled',$shrimp);
+		$this->grill($shrimp);
 		return $shrimp;
 	}
 

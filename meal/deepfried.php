@@ -4,6 +4,7 @@ namespace BubbaGump\Meal;
 
 use BubbaGump\Collection\ShrimpCollectionInterface;
 use BubbaGump\Collection\SkeweredShrimp;
+use BubbaGump\DeepFriedTrait;
 use BubbaGump\Dish;
 use BubbaGump\Dish\Soup;
 use BubbaGump\Restaurant;
@@ -12,7 +13,7 @@ use BubbaGump\Shrimp;
 class DeepFried implements MealInterface
 {
 
-	use ShrimpTrait;
+	use ShrimpTrait, DeepFriedTrait;
 
 	/**
 	 * @param Restaurant $restaurant
@@ -38,7 +39,7 @@ class DeepFried implements MealInterface
 	 */
 	public function cook($shrimp)
 	{
-		$this->restaurant->cook('DeepFried',$shrimp);
+		$this->deepfry($shrimp);
 		return $shrimp;
 	}
 

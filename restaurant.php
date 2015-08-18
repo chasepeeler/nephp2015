@@ -62,21 +62,7 @@ class Restaurant
 		//put sauce on shrimp
 	}
 
-	public function cook($method,$shrimp){
-		switch($method) {
-			case "Grilled":
-				break;
-			case "Broiled":
-				break;
-			case "Baked":
-				break;
-			case "Sauteed":
-				break;
-			case "DeepFried":
-			default:
-				break;
-		}
-	}
+
 
 
 

@@ -6,12 +6,13 @@ use BubbaGump\Collection\ShrimpCollectionInterface;
 use BubbaGump\Collection\SkeweredShrimp;
 use BubbaGump\Dish;
 use BubbaGump\Restaurant;
+use BubbaGump\SauteedTrait;
 use BubbaGump\Shrimp;
 
 class PanFried implements MealInterface
 {
 
-	use ShrimpTrait;
+	use ShrimpTrait, SauteedTrait;
 
 	/**
 	 * @param Restaurant $restaurant
@@ -36,7 +37,7 @@ class PanFried implements MealInterface
 	 */
 	public function cook($shrimp)
 	{
-		$this->restaurant->cook('Sauteed',$shrimp);
+		$this->sautee($shrimp);
 		return $shrimp;
 	}
 
