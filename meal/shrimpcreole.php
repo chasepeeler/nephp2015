@@ -27,6 +27,8 @@ class ShrimpCreole implements MealInterface
 		$this->restaurant = $restaurant;
 	}
 
+
+
 	/**
 	 * @return Restaurant
 	 */
